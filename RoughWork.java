@@ -7,8 +7,8 @@ public class RoughWork {
         count = count + "a";
         count = count + "a";
         count = count + "a";
-
-
         System.out.println(count);
+
     }
 }
+
