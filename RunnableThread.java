@@ -1,7 +1,8 @@
 // Runnable using lambda expression
 
 public class RunnableThread {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+
         /*
          * We're using lambda expression because the only purpose of Hi and
          * Hello class in that Multithread.java class is to call the run method
@@ -12,12 +13,12 @@ public class RunnableThread {
          * classes once.
          * 
          */
-    
+
         /*
          * Anyway we're going to pass the object in the thread constructor
          * So why create another object for that?
          * 
-         * That why I've passsed the lambda expression directly into the 
+         * That why I've passsed the lambda expression directly into the
          * thread constructor
          */
 
@@ -29,7 +30,7 @@ public class RunnableThread {
                 } catch (Exception e) {
                 }
             }
-        });
+        }, "Hi thread");
 
         Thread t2 = new Thread(() -> {
             for (int i = 0; i < 5; i++) {
@@ -39,7 +40,7 @@ public class RunnableThread {
                 } catch (Exception e) {
                 }
             }
-        });
+        }, "Hello thread");
 
         /*
          * This start method can only call run so by default we have to
@@ -57,6 +58,26 @@ public class RunnableThread {
         }
 
         t2.start();
+
+        /*
+         * isAlive() is a method to check if the thread is alive or not
+         */
+
+        System.out.println((t1.isAlive()) ? "Thread 1 is alive" : "Thread 1 is not alive");
+
+        /*
+         * If I want to print something after the execution of both the threads
+         * then we have to use the the method join() which makes the main thread
+         * to wait till the other thread joins the main thread.
+         * 
+         * This join may throw a exception so we have to handle those exception.
+         */
+
+        t1.join();
+        t2.join();
+
+        System.out.println("Executing this statement after the "
+                + "threads joining the main thread");
 
     }
 }
