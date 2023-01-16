@@ -62,7 +62,7 @@ public class StackImpl {
 
         int size = 0;
         if (head == null) {
-            return 0;
+            return size;
         } else {
             StackLinkedList n = head;
             while (n.next != null) {
