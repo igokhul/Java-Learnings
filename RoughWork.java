@@ -5,8 +5,10 @@ public class RoughWork {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
-        double num = sc.nextInt();
-        System.out.println(num);
+        int[] res = new int[2];
+        for(int i : res){
+            System.out.println(i + " ");
+        }
         
 
     }
