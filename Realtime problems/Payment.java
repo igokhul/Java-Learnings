@@ -14,10 +14,14 @@ class ContactList extends Variables {
 
     protected boolean isNumberValid(String number) {
         // Just checking if the number starts from 6 7 8 or 9
-        return (number.charAt(0) >= 6 && number.charAt(0) <= 9) ? true : false;
+        return ((number.charAt(0) >= 6 && number.charAt(0) <= 9) && (number.length() == 9)) ? true : false;
     }
 
-    protected void showContacts(ArrayList<String> numberList) {
+    protected boolean isNumberExist(String number) {
+        return numberList.contains(number);
+    }
+
+    protected void showContacts() {
         if (isContactsEmpty(numberList))
             System.out.println("Contact list is empty");
         else
@@ -29,38 +33,52 @@ class ContactList extends Variables {
         System.out.println("Number " + number + " added successfully");
     }
 
-    protected ArrayList<String> deleteContact(ArrayList<String> numberList, int position) {
+    protected ArrayList<String> deleteContact(int position) {
         numberList.remove(position + 1);
         return numberList;
     }
 
     protected void modifyContactList() {
         System.out.println("modifyContactList works fine");
-        ContactList conList = new ContactList();
         choice = 5;
         while (choice != 0) {
             switch (choice) {
                 case 1 -> {
-                    conList.showContacts(numberList);
+                    showContacts();
                     choice = 5;
                 }
                 case 2 -> {
+                    System.out.println("Enter a number to be stored in the contact list\n");
                     String number = sc.next();
-                    if (conList.isNumberValid(number)) {
-                        conList.addNumber(number);
+                    if (isNumberValid(number)) {
+                        addNumber(number);
                         choice = 5;
                     } else {
                         System.out.println("The given number is not valid.\nPlease enter again...\n");
+                        choice = 5;
                     }
                 }
                 case 3 -> {
                     System.out.println("Enter a number:\n");
-                    numberList.add(sc.next());
+                    String number = sc.nextLine();
+                    if (isNumberExist(number)) {
+                        System.out.println("The given number " + number + " exist");
+                        addNumber(number);
+                        choice = 5;
+                    } else {
+                        System.out.println("The given number " + number + " does not exist.\nTry again");
+                        choice = 5;
+                    }
                 }
                 case 4 -> {
-                    conList.showContacts(numberList);
-                    System.out.println("Enter the position of the number in the list\n");
-                    numberList = conList.deleteContact(numberList, sc.nextInt());
+                    showContacts();
+                    System.out.println("Enter the position of the number in the list to be modified\n");
+                    int numberPosition = sc.nextInt();
+                    System.out.println("Enter the new number to be updated\n");
+                    String newNumber = sc.next();
+                    numberList.add(numberPosition, newNumber);
+                    System.out.println("New number updated successfullly\nThe updated list is" + numberList);
+                    choice = 5;
                 }
                 case 5 -> {
                     System.out.println("Enter the number to choose a option\n");
