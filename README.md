@@ -47,5 +47,3 @@ I solve problems in leetcode but this is just a repository to solve problems tha
           1   2   1
         1   3   3   1
       1   4   6   4   1
-
-
